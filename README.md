@@ -1,6 +1,6 @@
 # SSW-567
 
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/turanisl/ssw-567/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/turanisl/ssw-567/tree/main)
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/turanisl/ssw-567/tree/HW03b_Mocking.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/turanisl/ssw-567/tree/HW03b_Mocking)
 
 ## HW03a
 
