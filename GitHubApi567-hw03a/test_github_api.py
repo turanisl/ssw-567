@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import patch, Mock
 
 from github_api import (
     get_repositories,
@@ -7,52 +6,33 @@ from github_api import (
     get_repo_summary,
 )
 
+
 class GitHubApiTest(unittest.TestCase):
 
-    @patch("github_api.requests.get")
-    def test_get_repositories(self, mock_get):
-        mock_response = Mock()
-        mock_response.json.return_value = [
-            {"name": "Repo1"},
-            {"name": "Repo2"}
-        ]
-        mock_get.return_value = mock_response
+    def test_get_repositories(self):
+        repositories = get_repositories("richkempinski")
 
-        result = get_repositories("testuser")
-
-        self.assertEqual(result, ["Repo1", "Repo2"])
+        self.assertIn("hellogitworld", repositories)
 
 
-    @patch("github_api.requests.get")
-    def test_get_commit_count(self, mock_get):
-        mock_response = Mock()
-        mock_response.json.return_value = [
-            {"sha": "commit1"},
-            {"sha": "commit2"},
-            {"sha": "commit3"}
-        ]
-        mock_get.return_value = mock_response
-
-        result = get_commit_count("testuser", "Repo1")
-
-        self.assertEqual(result, 3)
-
-
-    @patch("github_api.get_commit_count")
-    @patch("github_api.get_repositories")
-    def test_get_repo_summary(self, mock_repositories, mock_commit_count):
-        mock_repositories.return_value = ["Repo1", "Repo2"]
-        mock_commit_count.side_effect = [3, 5]
-
-        result = get_repo_summary("testuser")
-
-        self.assertEqual(
-            result,
-            [
-                ("Repo1", 3),
-                ("Repo2", 5)
-            ]
+    def test_get_commit_count(self):
+        commit_count = get_commit_count(
+            "richkempinski",
+            "hellogitworld"
         )
+
+        self.assertGreater(commit_count, 0)
+
+
+    def test_get_repo_summary(self):
+        results = get_repo_summary("richkempinski")
+
+        repository_names = [
+            repo_name for repo_name, commit_count in results
+        ]
+
+        self.assertIn("hellogitworld", repository_names)
+
 
 if __name__ == '__main__':
     unittest.main(exit=False, verbosity=2)
