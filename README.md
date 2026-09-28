@@ -4,6 +4,6 @@
 
 ## HW03b
 
-This project uses the GitHub REST API to retrieve a users public repositories and display the number of commits for each repository
+This project uses the Github REST API to retrieve a users public repositories and display the number of commits for each repository
 
-The project has automated unit tests and uses CircleCI for continuous integration
+The unit tests use mocking to eliminate external dependencies on the Github API and use CircleCI for continuous integration
